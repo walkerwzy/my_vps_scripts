@@ -1,0 +1,17 @@
+#download site
+server {
+  listen 8000;
+  server_name v.wzy.one;
+
+  root /site; 
+  index index.php index.html index.htm;
+  
+  location / {
+    autoindex on; 
+  }
+  location ~ \.php$ {
+    include        fastcgi_params;
+    fastcgi_pass   unix:/run/php/php7.0-fpm.sock;
+    fastcgi_param  SCRIPT_FILENAME $document_root/$fastcgi_script_name;
+   }
+}
